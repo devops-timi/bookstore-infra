@@ -1,3 +1,5 @@
 bookstore/backend/config
 
 bookstore/database
+
+bookstore/backend/.env
