@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Folio — A Curated Bookstore</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-mark">F</span>
+        <span class="logo-text">olio</span>
+      </div>
+      <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+        <span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <p class="nav-label">Browse by</p>
+      <ul class="category-list">
+        <li><button class="cat-btn active" data-category="all">
+          <span class="cat-icon">◈</span> All Books
+        </button></li>
+        <li><button class="cat-btn" data-category="nyt">
+          <span class="cat-icon">★</span> NYT Bestsellers
+        </button></li>
+        <li><button class="cat-btn" data-category="classics">
+          <span class="cat-icon">◉</span> Classics
+        </button></li>
+        <li><button class="cat-btn" data-category="children">
+          <span class="cat-icon">◎</span> Children's Books
+        </button></li>
+        <li><button class="cat-btn" data-category="top9">
+          <span class="cat-icon">◆</span> Top 9
+        </button></li>
+        <li><button class="cat-btn" data-category="social">
+          <span class="cat-icon">◇</span> Social Justice
+        </button></li>
+        <li><button class="cat-btn" data-category="fantasy">
+          <span class="cat-icon">◐</span> Fantasy
+        </button></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p>© 2025 Folio Books</p>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main" id="main">
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-title" id="pageTitle">All Books</div>
+      <div class="topbar-actions">
+        <button class="view-toggle" id="viewToggle" title="Toggle view">
+          <svg id="viewIcon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect x="2" y="2" width="7" height="7" rx="1" fill="currentColor"/>
+            <rect x="11" y="2" width="7" height="7" rx="1" fill="currentColor"/>
+            <rect x="2" y="11" width="7" height="7" rx="1" fill="currentColor"/>
+            <rect x="11" y="11" width="7" height="7" rx="1" fill="currentColor"/>
+          </svg>
+        </button>
+        <button class="cart-btn" id="cartBtn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- GALLERY VIEW -->
+    <section class="page active" id="galleryPage">
+      <div class="gallery-intro">
+        <h1 class="gallery-heading">Carefully curated.<br><em>Thoughtfully chosen.</em></h1>
+        <p class="gallery-sub">Discover books that stay with you long after the last page.</p>
+      </div>
+      <div class="book-grid" id="bookGrid"></div>
+    </section>
+
+    <!-- CART PAGE -->
+    <section class="page" id="cartPage">
+      <div class="cart-container">
+        <div class="cart-header">
+          <h2>Your Cart</h2>
+          <button class="back-btn" id="backToShop">← Continue Shopping</button>
+        </div>
+        <div class="cart-body">
+          <div class="cart-items" id="cartItems"></div>
+          <div class="order-summary" id="orderSummary">
+            <h3>Order Summary</h3>
+            <div class="summary-line"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+            <div class="summary-line"><span>Shipping</span><span>Free</span></div>
+            <div class="summary-line total"><span>Total</span><span id="totalPrice">$0.00</span></div>
+            <button class="checkout-btn" id="checkoutBtn">Place Order</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PRODUCT MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="productModal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-body">
+        <div class="modal-cover" id="modalCover"></div>
+        <div class="modal-info">
+          <div class="modal-badges" id="modalBadges"></div>
+          <h2 class="modal-title" id="modalTitle"></h2>
+          <p class="modal-author" id="modalAuthor"></p>
+          <p class="modal-desc" id="modalDesc"></p>
+          <div class="modal-meta" id="modalMeta"></div>
+          <div class="modal-price" id="modalPrice"></div>
+          <button class="add-to-cart-btn" id="modalAddCart">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDER CONFIRMATION MODAL -->
+  <div class="modal-overlay" id="confirmOverlay">
+    <div class="modal confirm-modal">
+      <div class="confirm-icon">✓</div>
+      <h2>Order Placed!</h2>
+      <p>Your order has been confirmed. Thank you for shopping with Folio.</p>
+      <button class="checkout-btn" id="confirmClose">Back to Shop</button>
+    </div>
+  </div>
+
+  <script src="js/books.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
