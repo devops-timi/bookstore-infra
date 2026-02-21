@@ -1,5 +1,3 @@
-bookstore/backend/config
-
 bookstore/backend/node_modules
 
 bookstore/backend/.env
